@@ -32,8 +32,8 @@ if __name__ == "__main__":
         y = current_coordinate_array[:, 1]
         u = current_coordinate_array[:, 3]
         v = current_coordinate_array[:, 4]
-        ax.scatter(x,y, s=4.0, marker='o',alpha=0.5,color='red')
-        ax.quiver(x, y, u, v, color='g', width=0.005, alpha=0.4)
+        ax.scatter(x,y, s=4.0, marker='o',alpha=0.7,color='red')
+        ax.quiver(x, y, u, v, color='g', width=0.004, alpha=0.5)
 
     # Start the writing process for the gif
     writergif = animation.PillowWriter(fps=2.0) 
