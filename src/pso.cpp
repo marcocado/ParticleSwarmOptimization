@@ -1,7 +1,9 @@
 /**
  * Class name: Particle
  * 
- * Description: [brief description of what the class represents or does]
+ * Description: Class of one Particle of the Swarm. This class has methods to update the three 
+ * attributes of every particle. A particle is characterized by a coordinate, a velocity and
+ * the best coordinate a individual particle has reached yet.
  * 
  * Public members:
  * - coordinate: location of the particle
