@@ -16,46 +16,46 @@ class Particle{
         std::vector<double> velocity;
         std::vector<double> local_best_coordinate;
 
-        Particle(std::vector<double> input_coordinate, std::vector<double> input_velocity, std::vector<double> input_local_best_coordinate){
-            coordinate = input_coordinate;
-            velocity = input_velocity;
-            local_best_coordinate = input_local_best_coordinate;
+        Particle(std::vector<double> init_coordinate, std::vector<double> init_velocity, std::vector<double> init_local_best_coordinate){
+            coordinate = init_coordinate;
+            velocity = init_velocity;
+            local_best_coordinate = init_local_best_coordinate;
         };
 
     public:
-        void update_velocity(int vector_size, double inertia, double cognitive_weight_factor, double social_weight_factor, std::vector<double> global_best_coordinate){
-            double random_1 = generate_random_number(0.0, 0.4);
-            double random_2 = generate_random_number(0.0, 0.4);
+        void update_velocity(const int& vector_size, const double& inertia, const double& cognitive_weight_factor, const double& social_weight_factor, const std::vector<double>& global_best_coordinate){
+            double random_1 = generate_random_double(0.0, 0.4);
+            double random_2 = generate_random_double(0.0, 0.4);
             for(int i = 0; i != vector_size-1; i++){
                 velocity[i] = inertia*velocity[i] + cognitive_weight_factor*random_1*(local_best_coordinate[i] - coordinate[i]) + social_weight_factor*random_2*(global_best_coordinate[i] - coordinate[i]);
             }
         }
 
-        void update_coordinate(int vector_size){
+        void update_coordinate(const int& vector_size){
             for(int i = 0; i != vector_size-1; i++){
                 coordinate[i] = coordinate[i] + velocity[i];
             }
             coordinate[vector_size-1] = fitness_function(coordinate[0], coordinate[1]);
         }
 
-        std::vector<double> check_local_best_coordinate(int vector_size, std::vector<double> global_best_coordinate){
+        void check_local_best_coordinate(const int& vector_size, std::vector<double>& global_best_coordinate){
             if(coordinate[vector_size-1] < local_best_coordinate[vector_size-1]){
                 local_best_coordinate = coordinate;
             }
             if(coordinate[vector_size-1] < global_best_coordinate[vector_size-1]){
                 global_best_coordinate = coordinate;
             }
-            return global_best_coordinate;
+            // return global_best_coordinate;
         }
 
         void print_coordinate(){
-            for(auto & value : coordinate){
+            for(auto& value : coordinate){
                 std::cout << value << ";";
             }
         }
 
         void print_velocity(){
-            for(auto & value : velocity){
+            for(auto& value : velocity){
                 std::cout << value << ";";
             }
             std::cout << "\n";
@@ -94,14 +94,14 @@ class Swarm {
         std::vector<double> global_best_coordinate; 
         std::vector<Particle> particles;
 
-        Swarm(int input_vector_size, double input_tolerance, double input_inertia, 
-            double input_social_weight_factor, double input_cognitive_weight_factor){
-            vector_size = input_vector_size;
-            tolerance = input_tolerance;
-            inertia = input_inertia;
-            social_weight_factor = input_social_weight_factor;
-            cognitive_weight_factor = input_cognitive_weight_factor;
-            global_best_coordinate = generate_random_vector(0.0, 1.0, input_vector_size);
+        Swarm(const int& init_vector_size, const double& init_tolerance, const double& init_inertia, 
+            const double& init_social_weight_factor, const double& init_cognitive_weight_factor){
+            vector_size = init_vector_size;
+            tolerance = init_tolerance;
+            inertia = init_inertia;
+            social_weight_factor = init_social_weight_factor;
+            cognitive_weight_factor = init_cognitive_weight_factor;
+            global_best_coordinate = generate_random_vector(0.0, 1.0, init_vector_size);
             std::vector<Particle> default_particles;
             particles = default_particles;
         };
@@ -112,7 +112,7 @@ class Swarm {
          * 
          * Description: Method to initialize all particles and append them at the end of the vector of the swarm
          */
-        void initialize_particles(int count_particles, double min_coordinate, double max_coordinate){
+        void initialize_particles(const int& count_particles, const double& min_coordinate, const double& max_coordinate){
             for(int i = 0; i != count_particles; i++){
                 std::vector<double> current_coordinate = generate_random_vector(min_coordinate, max_coordinate, vector_size);
                 current_coordinate = calculate_coordinate(current_coordinate);
@@ -132,11 +132,12 @@ class Swarm {
          */
         bool update_particles(){
             bool tolerance_readched;
-            for(auto & current_particle : particles){
+            for(auto& current_particle : particles){
                 current_particle.print_coordinate();
                 current_particle.update_velocity(vector_size, inertia, social_weight_factor, cognitive_weight_factor, global_best_coordinate);
                 current_particle.update_coordinate(vector_size);
-                global_best_coordinate = current_particle.check_local_best_coordinate(vector_size, global_best_coordinate);
+                current_particle.check_local_best_coordinate(vector_size, global_best_coordinate);
+                // global_best_coordinate = current_particle.check_local_best_coordinate(vector_size, global_best_coordinate);
                 if(current_particle.coordinate[vector_size-1] < tolerance){
                     tolerance_readched = true;
                 }
@@ -149,7 +150,7 @@ class Swarm {
         }
 
         void print_coordinates(){
-            for(auto & current_particle : particles){
+            for(auto& current_particle : particles){
                 current_particle.print_coordinate(); 
             }
         }
@@ -157,7 +158,7 @@ class Swarm {
         std::string csv_print(){
             std::string coordinate_line;
             std::string velocity_line;
-            for(auto & current_particle : particles){
+            for(auto& current_particle : particles){
                 coordinate_line = current_particle.csv_print_coordinate(); 
                 velocity_line = current_particle.csv_print_velocity(); 
             }

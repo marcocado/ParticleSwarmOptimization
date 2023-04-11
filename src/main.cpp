@@ -6,7 +6,7 @@
 #include <fstream>
 
 #include "fitness_function.cpp"
-#include "numerc.cpp"
+#include "random_generator.cpp"
 #include "solver.cpp"
 
 int main(void){
@@ -15,9 +15,9 @@ int main(void){
     int count_particles = 40;
     int vector_size = 3;
     double tolerance = 0.05;
-    double inertia = 0.3;
-    double social_weight_factor = 1.8;
-    double cognitive_weight_factor = 1.8;
+    double inertia = 0.5;
+    double social_weight_factor = 4.3;
+    double cognitive_weight_factor = 3.3;
     double min_coordinate = -10.0;
     double max_coordinate = 10.0;
 

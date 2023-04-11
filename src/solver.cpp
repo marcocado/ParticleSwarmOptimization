@@ -29,18 +29,18 @@ class Solver {
         double min_coordinate;
         double max_coordinate;
 
-        Solver(int input_count_particles, int input_vector_size, double input_tolerance, 
-                    double input_inertia, double input_social_weight_factor, double input_cognitive_weight_factor, 
-                    double input_min_coordinate, double input_max_coordinate){
-            max_iteration = 40;
-            count_particles = input_count_particles;
-            vector_size = input_vector_size;
-            tolerance = input_tolerance;
-            inertia = input_inertia;
-            social_weight_factor = input_social_weight_factor;
-            cognitive_weight_factor = input_cognitive_weight_factor;
-            min_coordinate = input_min_coordinate;
-            max_coordinate = input_max_coordinate;
+        Solver( const int& init_count_particles, const int& init_vector_size, const double& init_tolerance, 
+                const double& init_inertia, const double& init_social_weight_factor, const double& init_cognitive_weight_factor, 
+                const double& init_min_coordinate, const double& init_max_coordinate){
+            max_iteration = 10;
+            count_particles = init_count_particles;
+            vector_size = init_vector_size;
+            tolerance = init_tolerance;
+            inertia = init_inertia;
+            social_weight_factor = init_social_weight_factor;
+            cognitive_weight_factor = init_cognitive_weight_factor;
+            min_coordinate = init_min_coordinate;
+            max_coordinate = init_max_coordinate;
         };
 
     public:
@@ -54,9 +54,9 @@ class Solver {
             Swarm swarm(vector_size, tolerance, inertia, social_weight_factor, cognitive_weight_factor);
             swarm.initialize_particles(count_particles, min_coordinate, max_coordinate);
 
-            // Create a csv file
-            std::ofstream csv_file;
-            csv_file.open("/home/marco/Projekte/ParticleSwarmOptimization/data/output.csv");
+            // // Create a csv file
+            // std::ofstream csv_file;
+            // csv_file.open("/home/marco/Projekte/ParticleSwarmOptimization/data/output.csv");
 
             // Start the solving process
             int i = 0;
@@ -66,8 +66,8 @@ class Solver {
                 i++;
             }while(i != max_iteration and tolerance_reached == false);
 
-            // Close the csv file
-            csv_file.close();
+            // // Close the csv file
+            // csv_file.close();
 
             // Print the global best coordinate at the terminal
             std::cout << swarm.global_best_coordinate[0] << "   " << swarm.global_best_coordinate[1];
