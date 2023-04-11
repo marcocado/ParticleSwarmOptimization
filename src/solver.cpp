@@ -54,10 +54,6 @@ class Solver {
             Swarm swarm(vector_size, tolerance, inertia, social_weight_factor, cognitive_weight_factor);
             swarm.initialize_particles(count_particles, min_coordinate, max_coordinate);
 
-            // // Create a csv file
-            // std::ofstream csv_file;
-            // csv_file.open("/home/marco/Projekte/ParticleSwarmOptimization/data/output.csv");
-
             // Start the solving process
             int i = 0;
             bool tolerance_reached;
@@ -65,9 +61,6 @@ class Solver {
                 tolerance_reached = swarm.update_particles();
                 i++;
             }while(i != max_iteration and tolerance_reached == false);
-
-            // // Close the csv file
-            // csv_file.close();
 
             // Print the global best coordinate at the terminal
             std::cout << swarm.global_best_coordinate[0] << "   " << swarm.global_best_coordinate[1];
