@@ -45,7 +45,6 @@ class Particle{
             if(coordinate[vector_size-1] < global_best_coordinate[vector_size-1]){
                 global_best_coordinate = coordinate;
             }
-            // return global_best_coordinate;
         }
 
         void print_coordinate(){
@@ -137,7 +136,6 @@ class Swarm {
                 current_particle.update_velocity(vector_size, inertia, social_weight_factor, cognitive_weight_factor, global_best_coordinate);
                 current_particle.update_coordinate(vector_size);
                 current_particle.check_local_best_coordinate(vector_size, global_best_coordinate);
-                // global_best_coordinate = current_particle.check_local_best_coordinate(vector_size, global_best_coordinate);
                 if(current_particle.coordinate[vector_size-1] < tolerance){
                     tolerance_readched = true;
                 }
