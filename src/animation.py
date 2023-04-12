@@ -8,7 +8,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 if __name__ == "__main__":
     # read data with pandas and convert it to a numpy array
     count_particles = 40
-    df = pd.read_csv(r'/home/marco/Projekte/ParticleSwarmOptimization/data/output.csv', sep=";", header=None)
+    df = pd.read_csv(r'/home/marco/Projekte/particle_swarm_optimization/data/output.csv', sep=";", header=None)
     coordinate_array = df.to_numpy()
     length = int((coordinate_array.shape[0]+1)/count_particles)
 
@@ -17,8 +17,8 @@ if __name__ == "__main__":
     x = np.arange(-10.0, 10.0, 0.1)
     y = np.arange(-10.0, 10.0, 0.1)
     x_function, y_function = np.meshgrid(x, y)
-    f_function =  np.power(x_function - 2.0, 2.0) + np.power(y_function + 4.0, 2.0)
-
+    f_function = np.power(x_function - 2.0, 2.0) + np.power(y_function + 4.0, 2.0)
+    
     def animate(i):
         '''
         Animation function
@@ -32,8 +32,9 @@ if __name__ == "__main__":
         y = current_coordinate_array[:, 1]
         u = current_coordinate_array[:, 3]
         v = current_coordinate_array[:, 4]
-        ax.scatter(x,y, s=4.0, marker='o',alpha=0.7,color='red')
-        ax.quiver(x, y, u, v, color='g', width=0.004, alpha=0.5)
+        ax.scatter(x,y, s=8.0, marker='o',alpha=0.8,color='red')
+        ax.quiver(x, y, u, v, color='g', width=0.005, alpha=0.8)
+        ax.set_xlabel('Iteration ' + str(i))
 
     # Start the writing process for the gif
     writergif = animation.PillowWriter(fps=2.0) 

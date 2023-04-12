@@ -5,7 +5,7 @@
 #include <random>
 #include <fstream>
 
-#include "fitness_function.cpp"
+#include "optimization_function.cpp"
 #include "random_generator.cpp"
 #include "solver.cpp"
 

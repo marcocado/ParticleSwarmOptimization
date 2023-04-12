@@ -35,7 +35,7 @@ class Particle{
             for(int i = 0; i != vector_size-1; i++){
                 coordinate[i] = coordinate[i] + velocity[i];
             }
-            coordinate[vector_size-1] = fitness_function(coordinate[0], coordinate[1]);
+            coordinate[vector_size-1] = optimization_function(coordinate[0], coordinate[1]);
         }
 
         void check_local_best_coordinate(const int& vector_size, std::vector<double>& global_best_coordinate){
