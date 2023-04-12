@@ -16,7 +16,7 @@ double optimization_function(double x, double y){
 std::vector<std::vector<double>> calculate_coordinate_array(std::vector<std::vector<double>> input_vector){
     int iterator_end = input_vector.size();
     for(int i = 0; i != iterator_end; i++){
-        input_vector[2][i] = fitness_function(input_vector[0][i], input_vector[1][i]);
+        input_vector[2][i] = optimization_function(input_vector[0][i], input_vector[1][i]);
     }
     return input_vector;
 }
@@ -32,6 +32,6 @@ std::vector<std::vector<double>> calculate_coordinate_array(std::vector<std::vec
  * Return value: input_vector with the calculated z value
  */
 std::vector<double> calculate_coordinate(std::vector<double> input_vector){
-    input_vector[2] = fitness_function(input_vector[0], input_vector[1]);
+    input_vector[2] = optimization_function(input_vector[0], input_vector[1]);
     return input_vector;
 }
