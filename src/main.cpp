@@ -1,13 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <math.h>
-#include <random>
-#include <fstream>
-
-#include "optimization_function.cpp"
-#include "random_generator.cpp"
-#include "solver.cpp"
+#include "pso.hpp"
 
 int main(void){
 
