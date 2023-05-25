@@ -84,7 +84,7 @@ class Particle{
  * - particles: vector of all particle instances
  */
 class Swarm {
-    public:
+    protected:
         int vector_size; 
         double tolerance;
         double inertia; 

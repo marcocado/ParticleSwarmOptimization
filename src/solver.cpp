@@ -18,7 +18,7 @@
  * - max_coordinate: minimum range of the x and y values
  */
 class Solver {
-    public:
+    protected:
         int max_iteration;
         int count_particles;
         int vector_size;
